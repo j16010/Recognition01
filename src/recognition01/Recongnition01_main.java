@@ -32,7 +32,7 @@ public class Recongnition01_main {
 		
 		
 		String s = String.valueOf(result);
-		
+
 		ObjectMapper mapper=new ObjectMapper();
 		JsonNode node = null;
 		try {
