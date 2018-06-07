@@ -16,7 +16,7 @@ public class Recongnition01_main {
 		// TODO 自動生成されたメソッド・スタブ
 
 		VisualRecognition service = new VisualRecognition("2018-03-19");
-		service.setApiKey("j16010");
+		service.setApiKey("J16010");
 
 		DetectFacesOptions detectFacesOptions = null;
 		try {
@@ -37,26 +37,35 @@ public class Recongnition01_main {
 		JsonNode node = null;
 		try {
 			node = mapper.readTree(s);
+			
+			
+			int age_min = node.get("images").get(0).get("faces").get(0).get("age").get("min").asInt();
+			System.out.println("age_min:"+age_min);
+
+			int age_max = node.get("images").get(0).get("faces").get(0).get("age").get("max").asInt();
+			System.out.println("age_max:"+age_max);
+			
+			
+			double age_score= node.get("images").get(0).get("faces").get(0).get("age").get("score").asDouble();
+			System.out.println("age_score:"+age_score);
+			
+			int gender= node.get("images").get(0).get("faces").get(0).get("gender").get("gender").asInt();
+			System.out.println("gender:"+gender);
+			
+			double gender_score= node.get("images").get(0).get("faces").get(0).get("gender").get("score").asDouble();
+			System.out.println("gender:"+gender_score);
+			
+			MySQL mysql=new MySQL();//6月7日
+			
+			  mysql.updateImage(age_min, age_min, age_score, gender, gender_score);
+			
 		} catch (IOException e) {
 			// TODO 自動生成された catch ブロック
+			
+			
 			e.printStackTrace();
 		}
 		
-		int age_min = node.get("images").get(0).get("faces").get(0).get("age").get("min").asInt();
-		System.out.println("age_min:"+age_min);
-
-		int age_max = node.get("images").get(0).get("faces").get(0).get("age").get("max").asInt();
-		System.out.println("age_max:"+age_max);
-		
-		
-		double age_score= node.get("images").get(0).get("faces").get(0).get("age").get("score").asDouble();
-		System.out.println("age_score:"+age_score);
-		
-		String gender= node.get("images").get(0).get("faces").get(0).get("gender").get("gender").toString();
-		System.out.println("gender:"+gender);
-		
-		String gender_score= node.get("images").get(0).get("faces").get(0).get("gender").get("score").toString();
-		System.out.println("gender:"+gender_score);
 		
 	}
 
